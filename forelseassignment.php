@@ -47,12 +47,6 @@ foreach ($trees as $title => $properties) {
      }
  }
 
-    // if (is_array($properties)) {
-    //     for ($properties as $key => $property); {
-    //         echo $properties['extinct'] . PHP_EOL;
-    //     }
-    // }
-
  
 // Achieve the following output:
  
