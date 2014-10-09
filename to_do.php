@@ -2,16 +2,17 @@
 
 echo exec('clear');
 // Create array to hold list of todo items
-$items = ['one','two','three'];
-array_unshift($items, "phoney");
-unset($items[0]);
+$items = [];
+// array_unshift($items, "phoney");
+// unset($items[0]);
 
  // List array items formatted for CLI
  function sortItems($sort) {
     // $string = '';
     // var_dump($sort);
-    $input = strtoupper(trim(fgets(STDIN)));
+    $input = getinput($upper);
     if ($input == "A") {
+        $key++;
         sort($sort);
      // return $sort;
     }elseif ($input == "Z") {
@@ -27,7 +28,9 @@ unset($items[0]);
  function listitems($list) {
     $string = '';
     foreach($list as $key => $items) {
+        $key++;
         $string .= "[{$key}] {$items}" . PHP_EOL;
+
     }
 
     return $string;
@@ -50,7 +53,7 @@ do {
     //     // Display each item and a newline
     //     echo "[{$key}] {$item}\n";
     // }
-    // echo exec('clear');
+    echo exec('clear');
     // echo $sort;
     echo listitems($items);
 
@@ -62,26 +65,45 @@ do {
     // Use trim() to remove whitespace and newlines
       $input = getinput($upper);
     // Check for actionable input
-    if ($input === 'N')  {
-        // Ask for entry
-        echo 'Enter item: ';
-        // Add entry to list array
-        $items[] = trim(fgets(STDIN));
-    } elseif ($input === 'R') {
-        // Remove which item?
-        echo 'Enter item number to remove: ';
-        // Get array key
-        $key = trim(fgets(STDIN));
-        // *** $key--; ***
-        // Remove from array
-        unset($items[$key]);
-    } elseif ($input === 'S') {
-        echo 'Sort from "A" (A-Z) or "Z" (Z-A) ';
-        
-        $items = sortItems($items);
 
-
+    switch ($input)  {
+        case 'N':
+            echo 'Enter item: ';
+            $items[] = trim(fgets(STDIN));
+            break;
+        case 'R':
+            echo 'Enter item number to remove: ';
+            $key = trim(fgets(STDIN));
+            $key--;
+            unset($items[$key]);
+            break;
+        case 'S':
+            echo 'Sort from "A" (A-Z) or "Z" (Z-A) ';
+            $items = sortItems($items);
+            break;
+ 
     }
+
+    // if ($input === 'N')  {
+    //     // Ask for entry
+    //     echo 'Enter item: ';
+    //     // Add entry to list array
+    //     $items[] = trim(fgets(STDIN));
+    // } elseif ($input === 'R') {
+    //     // Remove which item?
+    //     echo 'Enter item number to remove: ';
+    //     // Get array key
+    //     $key = trim(fgets(STDIN));
+    //     $key--;
+    //     // Remove from array
+    //     unset($items[$key]);
+    // } elseif ($input === 'S') {
+    //     echo 'Sort from "A" (A-Z) or "Z" (Z-A) ';
+        
+    //     $items = sortItems($items);
+
+
+    // }
 // Exit when input is (Q)uit
 } while ($input != 'Q');
 echo exec('clear');
